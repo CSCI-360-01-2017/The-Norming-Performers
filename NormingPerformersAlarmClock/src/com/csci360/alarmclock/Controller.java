@@ -36,15 +36,15 @@ public class Controller {
     }
     
     public void snooze() {
-        if (alarm1.getSounding() || alarm2.getSounding()) {
+        if (alarm1.isSounding() || alarm2.isSounding()) {
             radio.stopRadio();
         }
         
-        if (alarm1.getSounding()) {
+        if (alarm1.isSounding()) {
             alarm1.snooze();
         }
         
-        if (alarm2. getSounding()) {
+        if (alarm2. isSounding()) {
             alarm2.snooze();
         }
     }
@@ -59,9 +59,12 @@ public class Controller {
     
     public void setAlarm(int alarmNumber, int h, int m) {
         if (alarmNumber == 1) {
-            alarm1.setAlarmTime(h, m);
+            alarm1.setHours(h);
+            alarm1.setMinutes(m);
         } else if (alarmNumber == 2) {
-            alarm2.setAlarmTime(h, m);
+            alarm2.setHours(h);
+            alarm2.setMinutes(m);
+            
         }
     }
 }
