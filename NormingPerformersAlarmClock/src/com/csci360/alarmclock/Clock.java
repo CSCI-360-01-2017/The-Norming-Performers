@@ -74,6 +74,8 @@ public class Clock {
                             returnTime += Integer.toString(hours % 12);
                         }
                         
+                        returnTime += ":";
+                        
                         // Splits based off whether the minutes are
                         // less than 10
                         if (minutes < 10) {
@@ -100,6 +102,8 @@ public class Clock {
                         }
                         // Adds the hour value to the returnTime
                         returnTime += Integer.toString(time.getHours());
+                        
+                        returnTime += ":";
                         
                         // Splits based off whether the minute value is
                         // a single digit

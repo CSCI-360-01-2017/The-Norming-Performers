@@ -7,7 +7,7 @@ package com.csci360.alarmclock;
 
 /**
  *
- * @author ty
+ * @author Normin' Performers
  */
 public class Radio {
     
