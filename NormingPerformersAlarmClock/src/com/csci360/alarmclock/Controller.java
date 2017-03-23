@@ -44,7 +44,7 @@ public class Controller {
             alarm1.snooze();
         }
         
-        if (alarm2. isSounding()) {
+        if (alarm2.isSounding()) {
             alarm2.snooze();
         }
     }
