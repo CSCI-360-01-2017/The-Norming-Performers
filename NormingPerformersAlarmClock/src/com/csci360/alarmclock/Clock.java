@@ -54,7 +54,7 @@ public class Clock {
          * 
          * @return 
          */
-	public String getTime() {
+	public String getTimeString() {
                 // Holds the time to be returned
 		String returnTime = "";
                 // Holds the current hour number of the Time
@@ -118,4 +118,8 @@ public class Clock {
                 // Returns the correct time
 		return returnTime;
 	}
+        
+        public Time getTime() {
+            return time;
+        }
 }
