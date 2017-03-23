@@ -27,12 +27,6 @@ public class ControllerTest {
     public static void tearDownClass() {
     }
 
-    @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     /**
      * Test of startRadio method, of class Controller.
      */
@@ -40,9 +34,9 @@ public class ControllerTest {
     public void testStartRadio() {
         System.out.println("startRadio");
         Controller instance = new Controller();
+        assertFalse(instance.radioIsPlaying());
         instance.startRadio();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(instance.radioIsPlaying());
     }
 
     /**
@@ -52,9 +46,10 @@ public class ControllerTest {
     public void testStopRadio() {
         System.out.println("stopRadio");
         Controller instance = new Controller();
+        instance.startRadio();
+        assertTrue(instance.radioIsPlaying());
         instance.stopRadio();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(instance.radioIsPlaying());
     }
 
     /**
@@ -64,9 +59,9 @@ public class ControllerTest {
     public void testStartTune() {
         System.out.println("startTune");
         Controller instance = new Controller();
+        assertFalse(instance.tuneIsPlaying());
         instance.startTune();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(instance.tuneIsPlaying());
     }
 
     /**
@@ -76,9 +71,10 @@ public class ControllerTest {
     public void testStopTune() {
         System.out.println("stopTune");
         Controller instance = new Controller();
+        instance.startTune();
+        assertTrue(instance.tuneIsPlaying());
         instance.stopTune();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(instance.tuneIsPlaying());
     }
 
     /**
@@ -88,9 +84,38 @@ public class ControllerTest {
     public void testSnooze() {
         System.out.println("snooze");
         Controller instance = new Controller();
+        Alarm alarm1 = instance.getAlarm1();
+        Alarm alarm2 = instance.getAlarm2();
+        
+        // TESTS ONLY ALARM 1
+        alarm1.setSounding(true);
+        assertTrue(alarm1.isSounding());
         instance.snooze();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(alarm1.isSounding());
+        
+        // TESTS ONLY ALARM 2
+        alarm2.setSounding(true);
+        assertTrue(alarm2.isSounding());
+        instance.snooze();
+        assertFalse(alarm2.isSounding());
+        
+        // TESTS BOTH ALARMS
+        alarm1.setSounding(true);
+        alarm2.setSounding(true);
+        assertTrue(alarm1.isSounding());
+        assertTrue(alarm2.isSounding());
+        instance.snooze();
+        assertFalse(alarm1.isSounding());
+        assertFalse(alarm2.isSounding());
+        
+        // TESTS NEITHER ALARM
+        alarm1.setSounding(false);
+        alarm2.setSounding(false);
+        assertFalse(alarm1.isSounding());
+        assertFalse(alarm2.isSounding());
+        instance.snooze();
+        assertFalse(alarm1.isSounding());
+        assertFalse(alarm2.isSounding());
     }
 
     /**
@@ -100,9 +125,12 @@ public class ControllerTest {
     public void testSwitchTimeFormat() {
         System.out.println("switchTimeFormat");
         Controller instance = new Controller();
+        Clock clock = instance.getClock();
+        assertTrue(clock.twelveHourTime);
         instance.switchTimeFormat();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(clock.twelveHourTime);
+        instance.switchTimeFormat();
+        assertTrue(clock.twelveHourTime);
     }
 
     /**
@@ -111,12 +139,12 @@ public class ControllerTest {
     @Test
     public void testSetTime() {
         System.out.println("setTime");
-        int h = 0;
-        int m = 0;
+        int h = 12;
+        int m = 50;
         Controller instance = new Controller();
         instance.setTime(h, m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(12, instance.getClock().getTime().getHours());
+        assertEquals(50, instance.getClock().getTime().getMinutes());
     }
 
     /**
@@ -125,13 +153,84 @@ public class ControllerTest {
     @Test
     public void testSetAlarm() {
         System.out.println("setAlarm");
-        int alarmNumber = 0;
-        int h = 0;
-        int m = 0;
+        int alarmNumber = 1;
+        int h = 4;
+        int m = 47;
         Controller instance = new Controller();
+        
+        // TESTS ALARM 1
         instance.setAlarm(alarmNumber, h, m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(4, instance.getAlarm1().getHours());
+        assertEquals(47, instance.getAlarm1().getMinutes());
+        
+        // TESTS ALARM 2
+        alarmNumber = 2;
+        instance.setAlarm(alarmNumber, h, m);
+        assertEquals(4, instance.getAlarm1().getHours());
+        assertEquals(47, instance.getAlarm2().getMinutes());
+    }
+
+    /**
+     * Test of radioIsPlaying method, of class Controller.
+     */
+    @Test
+    public void testRadioIsPlaying() {
+        System.out.println("radioIsPlaying");
+        Controller instance = new Controller();
+        assertFalse(instance.radioIsPlaying());
+        instance.startRadio();
+        assertTrue(instance.radioIsPlaying());
+    }
+
+    /**
+     * Test of tuneIsPlaying method, of class Controller.
+     */
+    @Test
+    public void testTuneIsPlaying() {
+        System.out.println("tuneIsPlaying");
+        Controller instance = new Controller();
+        assertFalse(instance.tuneIsPlaying());
+        instance.startTune();
+        assertTrue(instance.tuneIsPlaying());
+    }
+
+    /**
+     * Test of alarm1Sounding method, of class Controller.
+     */
+    @Test
+    public void testAlarm1Sounding() {
+        System.out.println("alarm1Sounding");
+        Controller instance = new Controller();
+        assertFalse(instance.getAlarm1().isSounding());
+        instance.getAlarm1().setSounding(true);
+        assertTrue(instance.getAlarm1().isSounding());
+    }
+
+    /**
+     * Test of alarm2Sounding method, of class Controller.
+     */
+    @Test
+    public void testAlarm2Sounding() {
+        System.out.println("alarm2Sounding");
+        Controller instance = new Controller();
+        assertFalse(instance.getAlarm2().isSounding());
+        instance.getAlarm2().setSounding(true);
+        assertTrue(instance.getAlarm2().isSounding());
+    }
+
+    /**
+     * Test of checkAlarms method, of class Controller.
+     */
+    @Test
+    public void testCheckAlarms() {
+        System.out.println("checkAlarms");
+        Controller instance = new Controller();
+        instance.getClock().setTime(4, 40);
+        instance.setAlarm(1, 4, 40);
+        instance.setAlarm(2, 4, 40);
+        instance.checkAlarms();
+        assertTrue(instance.getAlarm1().isSounding());
+        assertTrue(instance.getAlarm2().isSounding());
     }
     
 }
