@@ -122,4 +122,5 @@ public class Clock {
     public Time getTime() {
         return time;
     }
+
 }
