@@ -32,7 +32,7 @@ public class Time {
                 timer = new Timer();
                 // Creates a new schedule for the timer to act
                 // every minute
-                timer.schedule(new IncrementTask(), 0, 60000);
+                timer.schedule(new IncrementTask(), 0, 6000);
         }
 
         /**

@@ -133,6 +133,7 @@ public class Alarm {
         int alarmTimeMinutes = getMinutes();
         
         alarmTime += String.format("%02d", alarmTimeHours);
+        alarmTime += ":";
         alarmTime += String.format("%02d", alarmTimeMinutes);
                 
         return alarmTime;
