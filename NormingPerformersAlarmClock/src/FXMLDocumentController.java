@@ -28,16 +28,19 @@ public class FXMLDocumentController implements Initializable {
     @FXML private Circle powerCircle;
     @FXML private Text timeText;
     @FXML private Text editText;
+    @FXML private Text station;
     private Controller system = new Controller();
     private boolean isOn = true;
     private int editTimeClick = 0;
     private int viewAlarmClick = 0;
+    private int sounding = 0;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.powerCircle.setFill(Color.LAWNGREEN);
         this.timeText.setText(system.getClock().getTimeString());
         this.editText.setText("");
+        this.station.setText(Double.toString(system.getRadio().getFmStation()));
         
         Timer timer = new Timer();
         timer.schedule(new IncrementTask(), 0, 6000);
@@ -49,8 +52,10 @@ public class FXMLDocumentController implements Initializable {
         */
         public void run() {
             // Increments the time
+            system.checkAlarms();
             updateTimeText();
             updateEditText();
+            updateSounding();
         }
     }
     
@@ -89,6 +94,31 @@ public class FXMLDocumentController implements Initializable {
             this.editText.setText("Viewing Alarm2");
         }
     }
+    
+    @FXML
+    private void updateSounding() {
+        if(system.alarm1Sounding()) {
+            this.editText.setText("WAKE UP");
+        }
+        else if (system.alarm2Sounding()) {
+            this.editText.setText("WAKE UP");
+        }
+    }
+    
+    @FXML
+    private void snoozeClicked(ActionEvent event) {
+        system.snooze();
+        updateEditText();
+    }
+    
+    @FXML
+    private void stopClicked(ActionEvent event) {
+        system.getAlarm1().stopAlarm();
+        system.getAlarm2().stopAlarm();
+        updateEditText();
+    }
+    
+    
     
     @FXML
     private void onOffClicked(ActionEvent event) {
@@ -221,5 +251,38 @@ public class FXMLDocumentController implements Initializable {
         editTimeClick = 0;
         updateEditText();
         updateTimeText();
+    }
+    
+    @FXML
+    private void onAMFMclicked(ActionEvent event) {
+        system.getRadio().switchType();
+        if(system.getRadio().getRadioType() == "AM"){
+            this.station.setText(Integer.toString(system.getRadio().getAmStation()));
+        }
+        if(system.getRadio().getRadioType() == "FM"){
+            this.station.setText(Double.toString(system.getRadio().getFmStation()));
+        }
+    }
+    
+    @FXML
+    private void incStationClick(ActionEvent event){
+        system.getRadio().incrementStation();
+        if(system.getRadio().getRadioType() == "AM"){
+            this.station.setText(Integer.toString(system.getRadio().getAmStation()));
+        }
+        if(system.getRadio().getRadioType() == "FM"){
+            this.station.setText(Double.toString(system.getRadio().getFmStation()));
+        }
+    }
+    
+        @FXML
+    private void decStationClick(ActionEvent event){
+        system.getRadio().decrementStation();
+        if(system.getRadio().getRadioType() == "AM"){
+            this.station.setText(Integer.toString(system.getRadio().getAmStation()));
+        }
+        if(system.getRadio().getRadioType() == "FM"){
+            this.station.setText(Double.toString(system.getRadio().getFmStation()));
+        }
     }
 }

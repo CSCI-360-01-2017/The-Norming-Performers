@@ -70,6 +70,12 @@ public class Time {
                         }
                 }
         }
+        
+        public int minuteDifference(Time otherTime) {
+            int hourDif = this.hours - otherTime.getHours();
+            int minuteDif = this.minutes - otherTime.getMinutes();
+            return (hourDif*60) + minuteDif;
+        }
 
         /**
          * 

@@ -20,15 +20,16 @@ public class Alarm {
     private boolean radioAlarm;
     private boolean sounding;
     private boolean alarmOn;
+    private Clock clock;
     
-    public Alarm() {
-        
+    public Alarm(Clock clock) {
+        this.clock = clock;
         hours = 0;
         minutes = 0;
         offset = 0;
         radioAlarm = false;
         sounding = false;
-        alarmOn = false;
+        alarmOn = true;
         
     }
 
@@ -120,7 +121,9 @@ public class Alarm {
             
             setSounding(false);
             
-            offsetMinutes += SNOOZE_TIME;
+            int difference = (this.clock.getTime().getHours()-this.hours)*60 + (this.clock.getTime().getMinutes()-this.minutes);
+            System.out.println(this.clock.getTime());
+            offsetMinutes += difference >= 0 ? difference + SNOOZE_TIME : SNOOZE_TIME;
             
             setOffset(offsetMinutes);
         }        
@@ -142,12 +145,12 @@ public class Alarm {
     public String getAlarmTimeToSound(){
         
         String alarmTimeToSound = "";
-        int alarmTimeHours = getHours();
-        int alarmTimeMinutes = getMinutes();
-        int alarmOffsetMinutes = getOffset();
+        int alarmTimeHours = this.getHours();
+        int alarmTimeMinutes = this.getMinutes();
+        int alarmOffsetMinutes = this.getOffset();
         
         alarmTimeMinutes += alarmOffsetMinutes;
-        alarmTimeHours += (alarmOffsetMinutes / 60);
+        alarmTimeHours =+ (alarmOffsetMinutes/60);
         if(alarmTimeMinutes >= 60){
             
             alarmTimeMinutes = alarmTimeMinutes % 60;
@@ -160,7 +163,7 @@ public class Alarm {
         
         }
         
-        alarmTimeToSound += String.format("%02d", alarmTimeHours);
+        alarmTimeToSound += String.format("%02d:", alarmTimeHours);
         alarmTimeToSound += String.format("%02d", alarmTimeMinutes);
         
         return alarmTimeToSound;
@@ -173,4 +176,40 @@ public class Alarm {
     public void setOffset(int offset) {
         this.offset = offset;
     }
+    
+    public int getOffsetHours() {
+        
+        int alarmTimeHours = this.getHours();
+        int alarmTimeMinutes = this.getMinutes();
+        int alarmOffsetMinutes = this.getOffset();
+        
+        alarmTimeMinutes += alarmOffsetMinutes;
+        alarmTimeHours =+ (alarmOffsetMinutes/60);
+
+        if(alarmTimeHours >= 24){
+            
+            alarmTimeHours = alarmTimeHours % 24;
+        
+        }
+        
+        return alarmTimeHours;
+    
+    }
+    
+    public int getOffsetMinutes() {
+        
+        int alarmTimeMinutes = this.getMinutes();
+        int alarmOffsetMinutes = this.getOffset();
+        
+        alarmTimeMinutes += alarmOffsetMinutes;
+        if(alarmTimeMinutes >= 60){
+            
+            alarmTimeMinutes = alarmTimeMinutes % 60;
+        
+        }
+        
+        return alarmTimeMinutes;
+    
+    }
+    
 }

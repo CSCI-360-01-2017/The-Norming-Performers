@@ -33,7 +33,7 @@ public class Radio {
     
     public void incrementStation() {
         if (this.radioType.equals("FM")) {
-            this.fmStation = this.fmStation + .2;
+            this.fmStation = this.fmStation + 0.2;
             if (this.fmStation > Radio.MAX_FM)
                 this.fmStation -= (Radio.MAX_FM - Radio.MIN_FM);
             
@@ -79,5 +79,4 @@ public class Radio {
     public boolean isPlaying() {
         return playing;
     }
-    
 }
