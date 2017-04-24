@@ -17,12 +17,16 @@ public class Alarm {
     private int hours;
     private int minutes;
     private int offset;
+    
     private boolean radioAlarm;
     private boolean sounding;
     private boolean alarmOn;
+    private boolean twelveHourTime;
+    
     private Clock clock;
     
     public Alarm(Clock clock) {
+        
         this.clock = clock;
         hours = 0;
         minutes = 0;
@@ -30,6 +34,7 @@ public class Alarm {
         radioAlarm = false;
         sounding = false;
         alarmOn = true;
+        twelveHourTime = true;
         
     }
 
@@ -59,6 +64,11 @@ public class Alarm {
      */
     public void setMinutes(int minutes) {
         this.minutes = minutes;
+    }
+    
+    public void switchTimeFormat() {
+            // Inverts the 12-Hour Time boolean
+            twelveHourTime = !twelveHourTime;
     }
 
     /**
@@ -131,14 +141,37 @@ public class Alarm {
     
     public String getAlarmTime(){
         
+        String meridiem = "am";
         String alarmTime = "";
         int alarmTimeHours = getHours();
         int alarmTimeMinutes = getMinutes();
         
-        alarmTime += String.format("%02d", alarmTimeHours);
+        if(twelveHourTime = true && alarmTimeHours > 12){
+            alarmTimeHours = (alarmTimeHours % 12);
+            meridiem = "pm";
+        }
+        
+        if(twelveHourTime = true && alarmTimeHours == 12){;
+            meridiem = "pm";
+        }
+        
+        if(twelveHourTime = true && alarmTimeHours == 0)
+        {
+            alarmTime += String.format("%02d", 12);
+        }
+        
+        else
+        {
+            alarmTime += String.format("%02d", alarmTimeHours);
+        }
+        
         alarmTime += ":";
-        alarmTime += String.format("%02d", alarmTimeMinutes);
-                
+        alarmTime += String.format("%02d ", alarmTimeMinutes);
+        
+        if(twelveHourTime = true){
+            alarmTime += meridiem; 
+        }
+               
         return alarmTime;
     }
     

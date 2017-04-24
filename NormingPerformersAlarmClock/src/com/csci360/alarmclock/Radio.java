@@ -5,6 +5,8 @@
  */
 package com.csci360.alarmclock;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Normin' Performers
@@ -33,7 +35,7 @@ public class Radio {
     
     public void incrementStation() {
         if (this.radioType.equals("FM")) {
-            this.fmStation = this.fmStation + 0.2;
+            this.fmStation = (double)Math.round((this.fmStation + .2) * 10d) / 10d;
             if (this.fmStation > Radio.MAX_FM)
                 this.fmStation -= (Radio.MAX_FM - Radio.MIN_FM);
             
@@ -46,7 +48,7 @@ public class Radio {
     
     public void decrementStation() {
         if (this.radioType.equals("FM")) {
-            this.fmStation = this.fmStation - .2;
+            this.fmStation = (double)Math.round((this.fmStation - .2) * 10d) / 10d;
             if (this.fmStation < Radio.MIN_FM)
                 this.fmStation += (Radio.MAX_FM - Radio.MIN_FM);
             

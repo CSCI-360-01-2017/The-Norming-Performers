@@ -118,6 +118,8 @@ public class Controller {
     
     public void switchTimeFormat() {
         clock.switchTimeFormat();
+        alarm1.switchTimeFormat();
+        alarm2.switchTimeFormat();
     }
     
     public void setTime(int h, int m) {
