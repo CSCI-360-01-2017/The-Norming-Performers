@@ -33,9 +33,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML private Text station;
     @FXML private Button viewAlarmButton;
     @FXML private Button editButton;
+    @FXML private Button hrButton;
+    @FXML private ToggleButton activateButton;
     @FXML private ToggleButton radioOnOffButton;
     @FXML private ToggleButton AMFMButton;
-    @FXML private ToggleButton toneRadioButton;
+    @FXML private Button toneRadioButton;
     @FXML private Button downStation;
     @FXML private Button upStation;
     
@@ -47,6 +49,7 @@ public class FXMLDocumentController implements Initializable {
     
     private String displayed = "time";
     private String editing = "none";
+    private String soundType = "tone";
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,6 +57,9 @@ public class FXMLDocumentController implements Initializable {
         this.timeText.setText(system.getClock().getTimeString());
         this.editText.setText("");
         this.station.setText(Double.toString(system.getRadio().getFmStation()));
+        
+        this.system.getAlarm1().turnOffAlarm();
+        this.system.getAlarm2().turnOffAlarm();
         
         URL file = FXMLDocumentController.class.getClassLoader().getResource("batman_theme_x.mp3");
         final Media media = new Media(file.toString());
@@ -125,19 +131,16 @@ public class FXMLDocumentController implements Initializable {
     private void updateSounding() {
         if(system.alarm1Sounding()) {
             this.editText.setText("WAKE UP");
-            if (this.toneRadioButton.isSelected() && !this.radioOnOffButton.isSelected()) {
+            if (this.soundType.equals("radio") && !this.radioOnOffButton.isSelected()) {
                 this.radioOnOffButton.setSelected(true);
                 this.AMFMButton.setDisable(false);
                 this.downStation.setDisable(false);
                 this.upStation.setDisable(false);
                 this.playRadio();
             }
-            else if (this.toneRadioButton.isSelected() && this.radioOnOffButton.isSelected())
-            {
+            else if (this.soundType.equals("radio") && this.radioOnOffButton.isSelected())
                 this.unmuteRadio();
-            }
-            else
-            {
+            else {
                 this.muteRadio();
                 this.playSound();
             }
@@ -145,19 +148,43 @@ public class FXMLDocumentController implements Initializable {
         }
         else if (system.alarm2Sounding()) {
             this.editText.setText("WAKE UP");
-            if (this.toneRadioButton.isSelected() && !this.radioOnOffButton.isSelected()) {
+            if (this.soundType.equals("radio") && !this.radioOnOffButton.isSelected()) {
                 this.radioOnOffButton.setSelected(true);
                 this.playRadio();
             } 
-            else if (this.toneRadioButton.isSelected() && this.radioOnOffButton.isSelected())
-            {
+            else if (this.soundType.equals("radio") && this.radioOnOffButton.isSelected())
                 this.unmuteRadio();
-            }
-            else
-            {
+            else {
                 this.muteRadio();
                 this.playSound();
             }
+        }
+    }
+    
+    @FXML
+    private void activateClicked(ActionEvent event) {
+        if (this.displayed.equals("alarm1")) {
+            if (this.activateButton.isSelected())
+                this.system.getAlarm1().turnOnAlarm();
+            else
+                this.system.getAlarm1().turnOffAlarm();
+            
+        } else if (this.displayed.equals("alarm2")) {
+            if (this.activateButton.isSelected())
+                this.system.getAlarm2().turnOnAlarm();
+            else
+                this.system.getAlarm2().turnOffAlarm();
+        }
+    }
+    
+    @FXML
+    private void toneRadioClicked(ActionEvent event) {
+        if (this.soundType.equals("tone")) {
+            this.soundType = "radio";
+            this.toneRadioButton.setText("Radio");
+        } else {
+            this.soundType = "tone";
+            this.toneRadioButton.setText("Tone");
         }
     }
     
@@ -169,6 +196,7 @@ public class FXMLDocumentController implements Initializable {
             this.AMFMButton.setDisable(true);
             this.downStation.setDisable(true);
             this.upStation.setDisable(true);
+            this.radioOnOffButton.setSelected(false);
             this.muteRadio();
         }
         updateEditText();
@@ -180,13 +208,9 @@ public class FXMLDocumentController implements Initializable {
         system.getAlarm2().stopAlarm();
         this.batmanPlayer.stop();
         if(this.radioWasOn == false)
-        {
             this.stopRadio();
-        }
         else if(this.radioWasOn == true)
-        {
             this.unmuteRadio();
-        }
         updateEditText();
     }
     
@@ -212,9 +236,15 @@ public class FXMLDocumentController implements Initializable {
         if (this.editing.equals("none") || this.editing.equals("minutes")) {
             this.editing = "hours";
             this.viewAlarmButton.setDisable(true);
+            this.editButton.setText("Minutes");
+            if (!this.displayed.equals("time"))
+                this.activateButton.setDisable(false);
         } else if (this.editing.equals("hours")) {
             this.editing = "minutes";
+            this.editButton.setText("Hours");
             this.viewAlarmButton.setDisable(true);
+            if (!this.displayed.equals("time"))
+                this.activateButton.setDisable(false);
         }
         
         updateEditText();
@@ -223,6 +253,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void on1224HRClicked(ActionEvent event) {
         system.switchTimeFormat();
+        if (this.system.getClock().is12Hour())
+            this.hrButton.setText("12 hr");
+        else
+            this.hrButton.setText("24 hr");
         updateTimeText();
     }
     
@@ -330,12 +364,15 @@ public class FXMLDocumentController implements Initializable {
         if (this.displayed.equals("time")) {
             this.displayed = "alarm1";
             this.viewAlarmButton.setText("View Alarm2");
+            this.activateButton.setSelected(this.system.getAlarm1().isAlarmOn());
         } else if (this.displayed.equals("alarm1")) {
             this.displayed = "alarm2";
             this.viewAlarmButton.setText("View Time");
+            this.activateButton.setSelected(this.system.getAlarm2().isAlarmOn());
         } else if (this.displayed.equals("alarm2")) {
             this.displayed = "time";
             this.viewAlarmButton.setText("View Alarm1");
+            this.activateButton.setSelected(false);
         }
         
         updateEditText();
@@ -346,8 +383,11 @@ public class FXMLDocumentController implements Initializable {
     private void onDoneClicked(ActionEvent event) {
         this.displayed = "time";
         this.editing = "none";
+        this.editButton.setText("Edit");
         this.viewAlarmButton.setText("View Alarm1");
         this.viewAlarmButton.setDisable(false);
+        this.activateButton.setDisable(true);
+        this.activateButton.setSelected(false);
         updateEditText();
         updateTimeText();
     }
@@ -417,8 +457,10 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void stopRadio() {
-        if (this.radioPlayer != null)
+        if (this.radioPlayer != null) {
+            this.radioOnOffButton.setSelected(false);
             this.radioPlayer.stop();
+        }
     }
     
     private void pauseRadio() {

@@ -48,6 +48,10 @@ public class Clock {
                 // Inverts the 12-Hour Time boolean
 		twelveHourTime = !twelveHourTime;
 	}
+        
+        public boolean is12Hour() {
+            return this.twelveHourTime;
+        }
 
         /**
          * Used to get the time stored in the Clock

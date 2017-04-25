@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,20 +36,23 @@
    <left>
       <AnchorPane prefHeight="300.0" prefWidth="125.0" BorderPane.alignment="CENTER">
          <children>
-            <ToggleButton fx:id="timeFormatButton" layoutX="28.0" layoutY="43.0" mnemonicParsing="false" onAction="#on1224HRClicked" text="12/24 hr" />
             <ToggleButton fx:id="AMFMButton" disable="true" layoutX="32.0" layoutY="242.0" mnemonicParsing="false" onAction="#onAMFMclicked" text="AM/FM" />
-            <ToggleButton fx:id="toneRadioButton" layoutX="19.0" layoutY="150.0" mnemonicParsing="false" text="Tone/Radio" />
+            <Button fx:id="toneRadioButton" layoutX="33.0" layoutY="150.0" mnemonicParsing="false" onAction="#toneRadioClicked" prefHeight="27.0" prefWidth="60.0" text="Tone" />
+            <Button fx:id="hrButton" layoutX="33.0" layoutY="62.0" mnemonicParsing="false" onAction="#on1224HRClicked" prefHeight="27.0" prefWidth="60.0" text="12 hr" />
+            <Label layoutX="28.0" layoutY="127.0" text="Alarm Type" />
+            <Label layoutX="29.0" layoutY="38.0" text="Clock Type" />
          </children>
       </AnchorPane>
    </left>
    <right>
       <AnchorPane prefHeight="300.0" prefWidth="125.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="editButton" layoutX="22.0" layoutY="225.0" mnemonicParsing="false" onAction="#onEditTimeClicked" prefHeight="27.0" prefWidth="80.0" text="Edit" />
-            <Button fx:id="viewAlarmButton" layoutX="12.0" layoutY="177.0" mnemonicParsing="false" onAction="#onViewAlarmClicked" prefHeight="27.0" prefWidth="100.0" text="View Alarm1" />
-            <Slider layoutX="85.0" layoutY="14.0" orientation="VERTICAL" />
-            <Button layoutX="15.0" layoutY="50.0" mnemonicParsing="false" onAction="#onUpClicked" prefHeight="27.0" prefWidth="55.0" text="Up" />
-            <Button layoutX="15.0" layoutY="91.0" mnemonicParsing="false" onAction="#onDownClicked" prefHeight="27.0" prefWidth="55.0" text="Down" />
+            <Button fx:id="viewAlarmButton" layoutX="11.0" layoutY="201.0" mnemonicParsing="false" onAction="#onViewAlarmClicked" prefHeight="27.0" prefWidth="100.0" text="View Alarm1" />
+            <Slider layoutX="82.0" layoutY="14.0" orientation="VERTICAL" prefHeight="120.0" prefWidth="16.0" />
+            <Button layoutX="14.0" layoutY="40.0" mnemonicParsing="false" onAction="#onUpClicked" prefHeight="27.0" prefWidth="55.0" text="Up" />
+            <Button layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onAction="#onDownClicked" prefHeight="27.0" prefWidth="55.0" text="Down" />
+            <Button fx:id="editButton" layoutX="21.0" layoutY="248.0" mnemonicParsing="false" onAction="#onEditTimeClicked" prefHeight="27.0" prefWidth="80.0" text="Edit" />
+            <ToggleButton fx:id="activateButton" disable="true" layoutX="23.0" layoutY="163.0" mnemonicParsing="false" onAction="#activateClicked" text="Activated" />
          </children>
       </AnchorPane>
    </right>

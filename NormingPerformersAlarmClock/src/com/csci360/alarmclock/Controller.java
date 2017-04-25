@@ -49,7 +49,7 @@ public class Controller {
    
    public void checkAlarms() {
        // checks whether alarm1 should go off
-       if (this.alarm1.getOffsetHours() == this.clock.getTime().getHours()
+       if (this.alarm1.isAlarmOn() && this.alarm1.getOffsetHours() == this.clock.getTime().getHours()
            && this.alarm1.getOffsetMinutes() == this.clock.getTime().getMinutes()) {
            // the alarm1 is at the alarm time, must sound alarm
            if (this.alarm1.isRadioAlarm()) 
@@ -64,7 +64,7 @@ public class Controller {
        }
        
        // checks whether alarm2 should go off
-       if (this.alarm2.getOffsetHours() == this.clock.getTime().getHours()
+       if (this.alarm2.isAlarmOn() && this.alarm2.getOffsetHours() == this.clock.getTime().getHours()
            && this.alarm2.getOffsetMinutes() == this.clock.getTime().getMinutes()) {
            // the alarm2 is at the alarm time, must sound alarm
            if (this.alarm2.isRadioAlarm())
