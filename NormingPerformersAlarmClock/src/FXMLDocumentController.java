@@ -127,6 +127,9 @@ public class FXMLDocumentController implements Initializable {
             this.editText.setText("WAKE UP");
             if (this.toneRadioButton.isSelected() && !this.radioOnOffButton.isSelected()) {
                 this.radioOnOffButton.setSelected(true);
+                this.AMFMButton.setDisable(false);
+                this.downStation.setDisable(false);
+                this.upStation.setDisable(false);
                 this.playRadio();
             }
             else if (this.toneRadioButton.isSelected() && this.radioOnOffButton.isSelected())
@@ -163,6 +166,9 @@ public class FXMLDocumentController implements Initializable {
         system.snooze();
         this.batmanPlayer.stop();
         if (this.radioWasOn == false) {
+            this.AMFMButton.setDisable(true);
+            this.downStation.setDisable(true);
+            this.upStation.setDisable(true);
             this.muteRadio();
         }
         updateEditText();
