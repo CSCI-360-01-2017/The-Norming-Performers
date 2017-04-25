@@ -14,10 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import com.csci360.alarmclock.Controller;
-import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.beans.InvalidationListener;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
@@ -39,13 +37,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML private Button hrButton;
     @FXML private ToggleButton activateButton;
     @FXML private ToggleButton radioOnOffButton;
-    @FXML private ToggleButton AMFMButton;
+    @FXML private Button AMFMButton;
     @FXML private Button toneRadioButton;
     @FXML private Button downStation;
     @FXML private Button upStation;
     @FXML private Slider volumeSlider;
     
-    private Controller system = new Controller();
+    private final Controller system = new Controller();
     private boolean isOn = true;
     private boolean radioWasOn;
     private MediaPlayer batmanPlayer;
@@ -408,13 +406,17 @@ public class FXMLDocumentController implements Initializable {
     private void onAMFMclicked(ActionEvent event) {
         system.getRadio().switchType();
         if(system.getRadio().getRadioType().equals("AM")){
+            this.AMFMButton.setText("AM");
             this.station.setText(Integer.toString(system.getRadio().getAmStation()));
             this.stopRadio();
+            this.radioOnOffButton.setSelected(true);
             this.playRadio();
         }
         if(system.getRadio().getRadioType().equals("FM")){
+            this.AMFMButton.setText("FM");
             this.station.setText(Double.toString(system.getRadio().getFmStation()));
             this.stopRadio();
+            this.radioOnOffButton.setSelected(true);
             this.playRadio();
         }
     }

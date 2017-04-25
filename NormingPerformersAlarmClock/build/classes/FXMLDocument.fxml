@@ -36,11 +36,12 @@
    <left>
       <AnchorPane prefHeight="300.0" prefWidth="125.0" BorderPane.alignment="CENTER">
          <children>
-            <ToggleButton fx:id="AMFMButton" disable="true" layoutX="32.0" layoutY="242.0" mnemonicParsing="false" onAction="#onAMFMclicked" text="AM/FM" />
             <Button fx:id="toneRadioButton" layoutX="33.0" layoutY="150.0" mnemonicParsing="false" onAction="#toneRadioClicked" prefHeight="27.0" prefWidth="60.0" text="Tone" />
             <Button fx:id="hrButton" layoutX="33.0" layoutY="62.0" mnemonicParsing="false" onAction="#on1224HRClicked" prefHeight="27.0" prefWidth="60.0" text="12 hr" />
             <Label layoutX="28.0" layoutY="127.0" text="Alarm Type" />
             <Label layoutX="29.0" layoutY="38.0" text="Clock Type" />
+            <Button fx:id="AMFMButton" disable="true" layoutX="39.0" layoutY="236.0" mnemonicParsing="false" onAction="#onAMFMclicked" prefHeight="27.0" prefWidth="50.0" text="FM" />
+            <Label layoutX="30.0" layoutY="213.0" text="Radio Type" />
          </children>
       </AnchorPane>
    </left>
