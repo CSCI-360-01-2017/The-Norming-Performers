@@ -497,11 +497,13 @@ public class FXMLDocumentController implements Initializable {
         if(system.getRadio().getRadioType().equals("AM")){
             this.station.setText(Integer.toString(system.getRadio().getAmStation()));
             this.stopRadio();
+            this.radioOnOffButton.setSelected(true);
             this.playRadio();
         }
         if(system.getRadio().getRadioType().equals("FM")){
             this.station.setText(Double.toString(system.getRadio().getFmStation()));
             this.stopRadio();
+            this.radioOnOffButton.setSelected(true);
             this.playRadio();
         }
     }
@@ -512,11 +514,13 @@ public class FXMLDocumentController implements Initializable {
         if(system.getRadio().getRadioType().equals("AM")){
             this.station.setText(Integer.toString(system.getRadio().getAmStation()));
             this.stopRadio();
+            this.radioOnOffButton.setSelected(true);
             this.playRadio();
         }
         if(system.getRadio().getRadioType().equals("FM")){
             this.station.setText(Double.toString(system.getRadio().getFmStation()));
             this.stopRadio();
+            this.radioOnOffButton.setSelected(true);
             this.playRadio();
         }
     }
