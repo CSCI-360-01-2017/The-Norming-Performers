@@ -247,14 +247,10 @@ public class FXMLDocumentController implements Initializable {
             this.editing = "hours";
             this.viewAlarmButton.setDisable(true);
             this.editButton.setText("Minutes");
-            if (!this.displayed.equals("time"))
-                this.activateButton.setDisable(false);
         } else if (this.editing.equals("hours")) {
             this.editing = "minutes";
             this.editButton.setText("Hours");
             this.viewAlarmButton.setDisable(true);
-            if (!this.displayed.equals("time"))
-                this.activateButton.setDisable(false);
         }
         
         updateEditText();
@@ -373,14 +369,17 @@ public class FXMLDocumentController implements Initializable {
     private void onViewAlarmClicked(ActionEvent event) {
         if (this.displayed.equals("time")) {
             this.displayed = "alarm1";
+            this.activateButton.setDisable(false);
             this.viewAlarmButton.setText("View Alarm2");
             this.activateButton.setSelected(this.system.getAlarm1().isAlarmOn());
         } else if (this.displayed.equals("alarm1")) {
             this.displayed = "alarm2";
+            this.activateButton.setDisable(false);
             this.viewAlarmButton.setText("View Time");
             this.activateButton.setSelected(this.system.getAlarm2().isAlarmOn());
         } else if (this.displayed.equals("alarm2")) {
             this.displayed = "time";
+            this.activateButton.setDisable(true);
             this.viewAlarmButton.setText("View Alarm1");
             this.activateButton.setSelected(false);
         }
