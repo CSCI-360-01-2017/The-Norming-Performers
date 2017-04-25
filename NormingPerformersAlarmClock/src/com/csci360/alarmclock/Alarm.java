@@ -131,8 +131,7 @@ public class Alarm {
             
             setSounding(false);
             
-            int difference = (this.clock.getTime().getHours()-this.hours)*60 + (this.clock.getTime().getMinutes()-this.minutes);
-            System.out.println(this.clock.getTime());
+            int difference = (this.clock.getTime().getHours()-this.hours)*60 + (this.clock.getTime().getMinutes()-this.getOffsetMinutes());
             offsetMinutes += difference >= 0 ? difference + SNOOZE_TIME : SNOOZE_TIME;
             
             setOffset(offsetMinutes);
@@ -146,31 +145,24 @@ public class Alarm {
         int alarmTimeHours = getHours();
         int alarmTimeMinutes = getMinutes();
         
-        if(twelveHourTime = true && alarmTimeHours > 12){
+        if(twelveHourTime && alarmTimeHours > 12) {
             alarmTimeHours = (alarmTimeHours % 12);
             meridiem = "pm";
         }
         
-        if(twelveHourTime = true && alarmTimeHours == 12){;
+        if(twelveHourTime && alarmTimeHours == 12)
             meridiem = "pm";
-        }
         
-        if(twelveHourTime = true && alarmTimeHours == 0)
-        {
+        if(twelveHourTime && alarmTimeHours == 0)
             alarmTime += String.format("%02d", 12);
-        }
-        
         else
-        {
             alarmTime += String.format("%02d", alarmTimeHours);
-        }
         
         alarmTime += ":";
         alarmTime += String.format("%02d ", alarmTimeMinutes);
         
-        if(twelveHourTime = true){
+        if(twelveHourTime)
             alarmTime += meridiem; 
-        }
                
         return alarmTime;
     }

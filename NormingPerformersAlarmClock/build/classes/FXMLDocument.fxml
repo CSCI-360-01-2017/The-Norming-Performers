@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
+<BorderPane id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -23,11 +23,11 @@
       </AnchorPane>
    </center>
    <top>
-      <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="50.0" prefWidth="600.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
             <Circle fx:id="powerCircle" fill="#21ff4fde" layoutX="509.0" layoutY="25.0" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
             <ToggleButton fx:id="onOffButton" layoutX="526.0" layoutY="12.0" mnemonicParsing="false" onAction="#onOffClicked" selected="true" text="On/Off" />
-            <Button layoutX="200.0" layoutY="12.0" mnemonicParsing="false" onAction="#snoozeClicked" prefHeight="27.0" prefWidth="200.0" text="Snooze" />
+            <Button id="snooze" layoutX="200.0" layoutY="12.0" mnemonicParsing="false" onAction="#snoozeClicked" prefHeight="27.0" prefWidth="200.0" text="Snooze" />
             <Button layoutX="26.0" layoutY="12.0" mnemonicParsing="false" onAction="#stopClicked" prefHeight="27.0" prefWidth="75.0" text="Stop" />
          </children>
       </AnchorPane>
@@ -36,16 +36,16 @@
       <AnchorPane prefHeight="300.0" prefWidth="125.0" BorderPane.alignment="CENTER">
          <children>
             <ToggleButton fx:id="timeFormatButton" layoutX="28.0" layoutY="43.0" mnemonicParsing="false" onAction="#on1224HRClicked" text="12/24 hr" />
-            <ToggleButton layoutX="32.0" layoutY="242.0" mnemonicParsing="false" onAction="#onAMFMclicked" text="AM/FM" />
-            <ToggleButton layoutX="19.0" layoutY="150.0" mnemonicParsing="false" text="Tone/Radio" />
+            <ToggleButton fx:id="AMFMButton" disable="true" layoutX="32.0" layoutY="242.0" mnemonicParsing="false" onAction="#onAMFMclicked" text="AM/FM" />
+            <ToggleButton fx:id="toneRadioButton" layoutX="19.0" layoutY="150.0" mnemonicParsing="false" text="Tone/Radio" />
          </children>
       </AnchorPane>
    </left>
    <right>
       <AnchorPane prefHeight="300.0" prefWidth="125.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="17.0" layoutY="225.0" mnemonicParsing="false" onAction="#onEditTimeClicked" prefHeight="27.0" prefWidth="90.0" text="Edit Time" />
-            <Button layoutX="18.0" layoutY="177.0" mnemonicParsing="false" onAction="#onViewAlarmClicked" prefHeight="27.0" prefWidth="90.0" text="View Alarm" />
+            <Button fx:id="editButton" layoutX="22.0" layoutY="225.0" mnemonicParsing="false" onAction="#onEditTimeClicked" prefHeight="27.0" prefWidth="80.0" text="Edit" />
+            <Button fx:id="viewAlarmButton" layoutX="12.0" layoutY="177.0" mnemonicParsing="false" onAction="#onViewAlarmClicked" prefHeight="27.0" prefWidth="100.0" text="View Alarm1" />
             <Slider layoutX="85.0" layoutY="14.0" orientation="VERTICAL" />
             <Button layoutX="15.0" layoutY="50.0" mnemonicParsing="false" onAction="#onUpClicked" prefHeight="27.0" prefWidth="55.0" text="Up" />
             <Button layoutX="15.0" layoutY="91.0" mnemonicParsing="false" onAction="#onDownClicked" prefHeight="27.0" prefWidth="55.0" text="Down" />
@@ -56,14 +56,14 @@
       <AnchorPane prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Button layoutX="509.0" layoutY="12.0" mnemonicParsing="false" onAction="#onDoneClicked" text="Done" />
-            <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" text="Radio On/Off" />
             <Text fx:id="station" layoutX="260.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Station">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Button layoutX="353.0" layoutY="12.0" mnemonicParsing="false" onAction="#decStationClick" prefHeight="27.0" prefWidth="0.0" text="&lt;" />
-            <Button layoutX="383.0" layoutY="12.0" mnemonicParsing="false" onAction="#incStationClick" prefHeight="27.0" prefWidth="0.0" text="&gt;" />
+            <Button fx:id="downStation" disable="true" layoutX="353.0" layoutY="12.0" mnemonicParsing="false" onAction="#decStationClick" prefHeight="27.0" prefWidth="0.0" text="&lt;" />
+            <Button fx:id="upStation" disable="true" layoutX="383.0" layoutY="12.0" mnemonicParsing="false" onAction="#incStationClick" prefHeight="27.0" prefWidth="0.0" text="&gt;" />
+            <ToggleButton fx:id="radioOnOffButton" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#onRadioOnOffclicked" text="Radio On/Off" />
          </children>
       </AnchorPane>
    </bottom>
