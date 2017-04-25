@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
+<BorderPane id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app/styles.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -53,6 +53,11 @@
             <Button layoutX="14.0" layoutY="81.0" mnemonicParsing="false" onAction="#onDownClicked" prefHeight="27.0" prefWidth="55.0" text="Down" />
             <Button fx:id="editButton" layoutX="21.0" layoutY="248.0" mnemonicParsing="false" onAction="#onEditTimeClicked" prefHeight="27.0" prefWidth="80.0" text="Edit" />
             <ToggleButton fx:id="activateButton" disable="true" layoutX="23.0" layoutY="163.0" mnemonicParsing="false" onAction="#activateClicked" text="Activated" />
+<!--            <Button fx:id="editButton" layoutX="22.0" layoutY="225.0" mnemonicParsing="false" onAction="#onEditTimeClicked" prefHeight="27.0" prefWidth="80.0" text="Edit" />
+            <Button fx:id="viewAlarmButton" layoutX="12.0" layoutY="177.0" mnemonicParsing="false" onAction="#onViewAlarmClicked" prefHeight="27.0" prefWidth="100.0" text="View Alarm1" />
+            <Slider fx:id="volumeSlider" layoutX="85.0" layoutY="14.0" orientation="VERTICAL" />
+            <Button layoutX="15.0" layoutY="50.0" mnemonicParsing="false" onAction="#onUpClicked" prefHeight="27.0" prefWidth="55.0" text="Up" />
+            <Button layoutX="15.0" layoutY="91.0" mnemonicParsing="false" onAction="#onDownClicked" prefHeight="27.0" prefWidth="55.0" text="Down" />-->
          </children>
       </AnchorPane>
    </right>
