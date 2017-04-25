@@ -61,7 +61,8 @@ public class Controller {
                this.startTune();
            
            this.alarm1.setSounding(true);
-       }
+       } else
+           this.alarm1.setSounding(false);
        
        // checks whether alarm2 should go off
        if (this.alarm2.isAlarmOn() && this.alarm2.getOffsetHours() == this.clock.getTime().getHours()
@@ -76,7 +77,8 @@ public class Controller {
                this.startTune();
            
            this.alarm2.setSounding(true);
-       }
+       } else
+           this.alarm2.setSounding(false);
    }
     
     public void startRadio() {
