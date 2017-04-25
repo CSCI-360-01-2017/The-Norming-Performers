@@ -14,9 +14,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import com.csci360.alarmclock.Controller;
+import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.beans.InvalidationListener;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -38,6 +41,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML private ToggleButton toneRadioButton;
     @FXML private Button downStation;
     @FXML private Button upStation;
+    @FXML private Slider volumeSlider;
     
     private Controller system = new Controller();
     private boolean isOn = true;
@@ -59,6 +63,14 @@ public class FXMLDocumentController implements Initializable {
         final Media media = new Media(file.toString());
         this.batmanPlayer = new MediaPlayer(media);
         this.batmanPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        
+        this.volumeSlider.setValue(batmanPlayer.getVolume() * 100);
+        this.volumeSlider.valueProperty().addListener((javafx.beans.Observable observable) -> {
+            batmanPlayer.setVolume(volumeSlider.getValue()/100);
+            radioPlayer.setVolume(volumeSlider.getValue()/100);
+        });
+        
+
         
         Timer timer = new Timer();
         timer.schedule(new IncrementTask(), 0, 6000);
