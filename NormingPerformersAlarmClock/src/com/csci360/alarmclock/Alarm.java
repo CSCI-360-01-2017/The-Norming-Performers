@@ -217,7 +217,7 @@ public class Alarm {
         int alarmOffsetMinutes = this.getOffset();
         
         alarmTimeMinutes += alarmOffsetMinutes;
-        alarmTimeHours =+ (alarmOffsetMinutes/60);
+        alarmTimeHours += (alarmOffsetMinutes/60);
 
         if(alarmTimeHours >= 24){
             

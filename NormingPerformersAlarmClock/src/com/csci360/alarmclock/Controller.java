@@ -15,6 +15,7 @@ public class Controller {
     private Alarm alarm2;
     private int volume;
     private boolean tunePlaying;
+    private final String tune = "batman_theme_x.wav";
     
     // Java Timer used to increment the time
     private Timer timer;
@@ -86,6 +87,9 @@ public class Controller {
         radio.stopRadio();
     }
     
+    public String getTune() {
+        return tune;
+    }
     public void startTune() {
         this.tunePlaying = true;
     }

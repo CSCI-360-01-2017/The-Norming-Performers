@@ -229,6 +229,9 @@ public class ControllerTest {
         instance.setAlarm(1, 4, 40);
         instance.setAlarm(2, 4, 40);
         instance.checkAlarms();
+        System.out.println(instance.getAlarm1().getAlarmTime());
+        System.out.println(instance.getAlarm1().getOffsetHours());
+        System.out.println(instance.getClock().getTimeString());
         assertTrue(instance.getAlarm1().isSounding());
         assertTrue(instance.getAlarm2().isSounding());
     }

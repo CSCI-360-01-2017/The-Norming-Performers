@@ -17,6 +17,8 @@ import com.csci360.alarmclock.Controller;
 import com.csci360.alarmclock.Time;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  *
@@ -29,6 +31,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML private Text timeText;
     @FXML private Text editText;
     @FXML private Text station;
+    
     private Controller system = new Controller();
     private boolean isOn = true;
     private int editTimeClick = 0;
@@ -57,6 +60,15 @@ public class FXMLDocumentController implements Initializable {
             updateEditText();
             updateSounding();
         }
+    }
+    
+    private void playSound(String sound) {
+        
+        URL file = FXMLDocumentController.class.getClassLoader().getResource(sound);
+        final Media media = new Media(file.toString());
+        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+    
     }
     
     @FXML
@@ -99,9 +111,11 @@ public class FXMLDocumentController implements Initializable {
     private void updateSounding() {
         if(system.alarm1Sounding()) {
             this.editText.setText("WAKE UP");
+            playSound("batman_theme_x.wav");
         }
         else if (system.alarm2Sounding()) {
             this.editText.setText("WAKE UP");
+            playSound("batman_theme_x.wav");
         }
     }
     
@@ -109,6 +123,7 @@ public class FXMLDocumentController implements Initializable {
     private void snoozeClicked(ActionEvent event) {
         system.snooze();
         updateEditText();
+        
     }
     
     @FXML

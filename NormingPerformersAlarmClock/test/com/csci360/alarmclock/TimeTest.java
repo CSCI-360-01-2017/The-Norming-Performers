@@ -33,10 +33,22 @@ public class TimeTest {
     @Test
     public void testIncrement() {
         System.out.println("increment");
+        int h = 0;
+        int m = 0;
         Time instance = new Time();
+        instance.setTime(h, m);
+        //instantiate
+        assertEquals(0, instance.getHours());
+        assertEquals(0, instance.getMinutes());
+        //minutes increment properly
         instance.increment();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(0, instance.getHours());
+        assertEquals(1, instance.getMinutes());
+        //minutes carry over
+        instance.setTime(h, 59);
+        instance.increment();
+        assertEquals(1, instance.getHours());
+        assertEquals(0, instance.getMinutes());
     }
 
     /**
@@ -49,36 +61,7 @@ public class TimeTest {
         int m = 0;
         Time instance = new Time();
         instance.setTime(h, m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(0, instance.getHours());
+        assertEquals(0, instance.getMinutes());
     }
-
-    /**
-     * Test of getHours method, of class Time.
-     */
-    @Test
-    public void testGetHours() {
-        System.out.println("getHours");
-        Time instance = new Time();
-        int expResult = 0;
-        int result = instance.getHours();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getMinutes method, of class Time.
-     */
-    @Test
-    public void testGetMinutes() {
-        System.out.println("getMinutes");
-        Time instance = new Time();
-        int expResult = 0;
-        int result = instance.getMinutes();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

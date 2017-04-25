@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="NormingPerformersAlarmClock.jar" size="14841" download="eager" />
+    <jar href="NormingPerformersAlarmClock.jar" size="77542" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="NormingPerformersAlarmClock" >
     <param name="requiredFXVersion" value="8.0+"/>
