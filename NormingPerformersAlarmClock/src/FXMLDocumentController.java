@@ -68,7 +68,7 @@ public class FXMLDocumentController implements Initializable {
         this.batmanPlayer = new MediaPlayer(media);
         this.batmanPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         
-        this.volumeSlider.setValue(batmanPlayer.getVolume() * 100);
+        this.volumeSlider.setValue(100);
         this.volumeSlider.valueProperty().addListener((javafx.beans.Observable observable) -> {
             batmanPlayer.setVolume(volumeSlider.getValue()/100);
             radioPlayer.setVolume(volumeSlider.getValue()/100);
